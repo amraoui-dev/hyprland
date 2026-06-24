@@ -10,17 +10,28 @@
 -- Create your files separately and then require them like this:
 -- require("myColors")
 
+-----------------
+--- Importing ---
+-----------------
+local monitors = require("modules.monitors")
+-- reauire("~/.config/hypr/modules/autostart.lua")
+-------------------
+---- AUTOSTART ----
+-------------------
+
+hl.on("hyprland.start", function()
+	hl.exec_cmd("waybar")
+	hl.exec_cmd("awww-daemon")
+	hl.exec_cmd("swaync")
+	hl.exec_cmd("wl-gammarelay")
+end)
+
 ------------------
 ---- MONITORS ----
 ------------------
 
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
-hl.monitor({
-	output = "",
-	mode = "preferred",
-	position = "auto",
-	scale = "auto",
-})
+hl.monitor(monitors)
 
 ---------------------
 ---- MY PROGRAMS ----
@@ -32,17 +43,7 @@ local fileManager = "thunar"
 local menu = "rofi -show drun"
 local browser = "firefox"
 local emojiPicker = "rofimoji -a copy"
-
--------------------
----- AUTOSTART ----
--------------------
-
-hl.on("hyprland.start", function()
-	hl.exec_cmd("waybar")
-	hl.exec_cmd("awww-daemon")
-	hl.exec_cmd("swaync")
-	hl.exec_cmd("wl-gammarelay")
-end)
+local note = "obsidian"
 
 -------------------------------
 ---- ENVIRONMENT VARIABLES ----
@@ -244,7 +245,8 @@ hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit")) -- dwindle only
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
-hl.bind(mainMod .. " + O", hl.dsp.exec_cmd(emojiPicker))
+hl.bind(mainMod .. " + L", hl.dsp.exec_cmd(emojiPicker))
+hl.bind(mainMod .. " + O", hl.dsp.exec_cmd(note))
 
 ----------------
 ---Screenshot---
@@ -373,7 +375,14 @@ hl.window_rule({
 	no_focus = true,
 })
 
--- Layer Rules
+hl.window_rule({
+	match = { class = "thunar" },
+	opacity = "0.90 override 0.90 override 0.90 override",
+})
+-----------------
+---Layer Rules---
+-----------------
+
 hl.layer_rule({
 	match = { namespace = "waybar" },
 	blur = true,
