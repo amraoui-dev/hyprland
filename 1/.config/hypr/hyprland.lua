@@ -245,9 +245,9 @@ hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit")) -- dwindle only
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
-hl.bind(mainMod .. " + L", hl.dsp.exec_cmd(emojiPicker))
+hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"))
 hl.bind(mainMod .. " + O", hl.dsp.exec_cmd(note))
-
+hl.bind(mainMod .. " + U", hl.dsp.exec_cmd(emojiPicker))
 ----------------
 ---Screenshot---
 ----------------
